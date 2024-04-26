@@ -9,7 +9,7 @@ setcl(x, lab)
 \arguments{
 \item{x}{a vector to be labelled}
 
-\item{lab}{a label string}
+\item{lab}{a label to be set; must be a character vector of length 1}
 }
 \description{
 Sets variable (column) labels
