@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Jascha", "Egli", email = "jaschamax.egli@uzh.ch", role = c("aut", "cre"))
 Description: Collection of utility functions
-License: use_gpl3_license()
+License: 
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
