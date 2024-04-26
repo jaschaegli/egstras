@@ -11,7 +11,6 @@
 #'
 #' rescaled <- center_vector(vec, mean = 10)
 #' summary(rescaled)
-#' @importFrom checkmate assert_numeric
 #' @export
 
 center_vector <- function(vector, mean = 1) {

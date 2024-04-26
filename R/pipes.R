@@ -7,7 +7,6 @@
 #' c <- c("some", "text")
 #' c |> pb(grep("some", .))
 #'
-#' @importFrom pipebind bind
 #' @export
 
 
