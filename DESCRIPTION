@@ -2,7 +2,7 @@ Package: egstras
 Title: Some tools
 Version: 0.0.0.9000
 Authors@R: 
-    person("Jascha", "Egli", role = c("aut", "cre"))
+    person("Jascha", "Egli", email = "jaschamax.egli@uzh.ch", role = c("aut", "cre"))
 Description: Collection of utility functions
 License: use_gpl3_license()
 Encoding: UTF-8
