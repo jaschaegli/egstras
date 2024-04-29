@@ -16,62 +16,70 @@ getvl <- function(x, textonly = FALSE) {
 
 
 
-#' Get value labels
+#' Set value labels for matching args
 #'
-#' Returns value labels as written by e.g. SPSS
+#' @keywords internal
+setvl_helper_add_partial <- function(x, labs) {
+    if (!all(labs %in% x)) {
+        warning("some labels are not present in x, and will be ignored")
+    }
+    labs_missing <- x[which(!x %in% labs)]
+    nums_as_labs <- setNames(labs_missing, nm = as.character(labs_missing))
+    labs <- sort(c(nums_as_labs, labs))
+    attr(x, "labels") <- sort(labs)
+
+    return(x)
+}
+
+
+
+#' Set value labels with unnamed args
+#'
+#' @keywords internal
+setvl_helper_add_unnamed <- function(x, labs) {
+    labs <- setNames(
+        sort(unique(as.numeric(x))),
+        nm = labs
+    )
+    attr(x, "labels") <- labs
+    return(x)
+}
+
+
+
+#' Set value labels
+#'
+#' sets the "labels" attribute
 #' @param x a vector to be labelled
-#' @param labs a vector with labels; either an unnamed character vector, or a named numeric vector;
-#' length must be equal to the number of unique elements in x
+#' @param labs a vector containing labels; either an unnamed character vector of
+#' equal in length to the number of unique elements of x,
 #' @export
 setvl <- function(x, labs) {
-    inputcomplaint <- "labs must either be a named numeric vector in the form
-    c('Example' = 1, 'Test' = 2), or an unnamed character vector"
-    numericcomplaint <- "x is not numeric; numbers in the label may not
-    correspond to values of x"
+    checkmate::qassert(x, "x")
+    checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
 
-
-    if (!is.vector(labs)) {
-        stop(inputcomplaint)
+    if (
+        (!length(labs) == length(unique(x)) && !checkmate::testAtomicVector(labs, names = "named")) ||
+            (length(labs) == length(unique(x)) && !is.character(labs))
+    ) {
+        stop("Labels must either be a character vector of length unique(x), or a named vector")
     }
 
     if (!length(labs) == length(unique(x))) {
-        stop("You must provide as many labels as there are unique values in x")
-    }
-
-    if (is.null(names(labs))) {
-        if (!is.character(labs)) {
-            stop(inputcomplaint)
-        }
-
-        if (is.numeric(x)) {
-            labs <- setNames(
-                sort(unique(as.numeric(x))),
-                nm = labs
-            )
+        if (!any(labs %in% x)) {
+            stop("Labels are not equal in length to x and contains no mariables to match on")
         } else {
-            warning(numericcomplaint)
-            labs <- setNames(
-                c(seq_along(labs)),
-                nm = labs
-            )
+            x <- setvl_helper_add_partial(x, labs)
+            return(x)
         }
-        attr(x, "labels") <- labs
-    }
-
-    if (!is.null(names(labs))) {
-        if (!is.numeric(labs)) {
-            stop(inputcomplaint)
+    } else {
+        if (!checkmate::testAtomicVector(labs, names = "named")) {
+            warning("Labels are not a named vector; assigning based on order")
+            x <- setvl_helper_add_unnamed(x, labs)
+            return(x)
+        } else {
+            attr(x, "labels") <- labs
         }
-
-        if (is.numeric(x) && !all(labs) %in% x) {
-            warning("Label numbers do not fully match numeric values of x")
-        }
-
-        if (!is.numeric(x)) {
-            warning(numericcomplaint)
-        }
-
-        attr(x, "labels") <- sort(labs)
     }
     return(x)
 }
@@ -85,7 +93,7 @@ setvl <- function(x, labs) {
 #' @export
 
 getcl <- function(x) {
-    checkmate::qassert(lab, "v")
+    checkmate::qassert(x, "v")
     out <- attr(x, "label")
     return(out)
 }
@@ -99,7 +107,7 @@ getcl <- function(x) {
 #' @param lab a label to be set; must be a character vector of length 1
 #' @export
 setcl <- function(x, lab) {
-    checkmate::qassert(lab, "S")
+    checkmate::qassert(lab, "S1")
     attr(x, "label") <- lab
     return(x)
 }
