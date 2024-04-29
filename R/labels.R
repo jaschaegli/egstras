@@ -58,6 +58,10 @@ setvl <- function(x, labs) {
     checkmate::qassert(x, "x")
     checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
 
+    if (namecheck(labs) == "some_named") {
+        stop("Labels may not mix named and unnamed elements")
+    }
+
     ulen <- length(unique(na.omit(x)))
     labsnamed <- checkmate::testAtomicVector(labs, names = "named")
 
