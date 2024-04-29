@@ -20,7 +20,7 @@ getvl <- function(x, textonly = FALSE) {
 #'
 #' @keywords internal
 setvl_helper_add_partial <- function(x, labs) {
-    if (!all(labs %in% x)) {
+    if (!all(labs %in% unique(na.omit(x)))) {
         warning("some labels are not present in x, and will be ignored")
     }
     labs_missing <- x[which(!x %in% labs)]
@@ -38,7 +38,7 @@ setvl_helper_add_partial <- function(x, labs) {
 #' @keywords internal
 setvl_helper_add_unnamed <- function(x, labs) {
     labs <- setNames(
-        sort(unique(as.numeric(x))),
+        sort(unique(as.numeric(na.omit(x)))),
         nm = labs
     )
     attr(x, "labels") <- labs
@@ -58,14 +58,17 @@ setvl <- function(x, labs) {
     checkmate::qassert(x, "x")
     checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
 
+    ulen <- length(unique(na.omit(x)))
+    labsnamed <- checkmate::testAtomicVector(labs, names = "named")
+
     if (
-        (!length(labs) == length(unique(x)) && !checkmate::testAtomicVector(labs, names = "named")) ||
-            (length(labs) == length(unique(x)) && !is.character(labs))
+        ((!length(labs) == ulen) && !labsnamed) ||
+            ((length(labs) == ulen) && !is.character(labs) && !labsnamed)
     ) {
         stop("Labels must either be a character vector of length unique(x), or a named vector")
     }
 
-    if (!length(labs) == length(unique(x))) {
+    if (!length(labs) == ulen) {
         if (!any(labs %in% x)) {
             stop("Labels are not equal in length to x and contains no mariables to match on")
         } else {
