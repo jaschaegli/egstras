@@ -6,6 +6,7 @@
 #' @export
 
 getvl <- function(x, textonly = FALSE) {
+    qassert(x, "V>=2")
     out <- attr(x, "labels")
     if (textonly == TRUE) {
         out <- names(out)
@@ -44,7 +45,7 @@ setvl <- function(x, labs) {
 
         if (is.numeric(x)) {
             labs <- setNames(
-                order(unique(as.numeric(x))),
+                sort(unique(as.numeric(x))),
                 nm = labs
             )
         } else {
@@ -84,6 +85,7 @@ setvl <- function(x, labs) {
 #' @export
 
 getcl <- function(x) {
+    checkmate::qassert(lab, "v")
     out <- attr(x, "label")
     return(out)
 }
@@ -97,9 +99,7 @@ getcl <- function(x) {
 #' @param lab a label to be set; must be a character vector of length 1
 #' @export
 setcl <- function(x, lab) {
-    if (!length(lab) == 1 || !is.character(lab)) {
-        stop("lab must be a character vector of length 1")
-    }
+    checkmate::qassert(lab, "S")
     attr(x, "label") <- lab
     return(x)
 }
