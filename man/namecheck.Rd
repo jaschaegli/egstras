@@ -12,3 +12,10 @@ namecheck(x)
 \description{
 Check whether all, some, or no elements of an object have names
 }
+\examples{
+namecheck(c("a" = 0, 1))
+
+namecheck(list("a" = 0, "b" = 1))
+
+namecheck(c(0, 1))
+}
