@@ -74,7 +74,7 @@ setvl <- function(x, labs) {
 
     if (!length(labs) == ulen) {
         if (!any(labs %in% x)) {
-            stop("Labels are not equal in length to x and contains no mariables to match on")
+            stop("Labels are not equal in length to x and contain no variables to match on")
         } else {
             x <- setvl_helper_add_partial(x, labs)
         }
