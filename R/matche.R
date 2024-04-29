@@ -17,8 +17,8 @@ make_matchcheck <- function(
     label = NULL) {
     output <- match.arg(output, several.ok = FALSE)
     nahandle <- match.arg(nahandle)
-    checkmate::qassert(levels, "s2")
-    checkmate::qassert(label, c("s1", 0))
+    checkmate::qassert(levels, "s2") # String of length 2
+    checkmate::qassert(label, c("s1", 0)) # String of length 1 or NULL
 
 
     checkvec <- data.table::fcase(
