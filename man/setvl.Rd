@@ -2,16 +2,16 @@
 % Please edit documentation in R/labels.R
 \name{setvl}
 \alias{setvl}
-\title{Get value labels}
+\title{Set value labels}
 \usage{
 setvl(x, labs)
 }
 \arguments{
 \item{x}{a vector to be labelled}
 
-\item{labs}{a vector with labels; either an unnamed character vector, or a named numeric vector;
-length must be equal to the number of unique elements in x}
+\item{labs}{a vector containing labels; either an unnamed character vector of
+equal in length to the number of unique elements of x,}
 }
 \description{
-Returns value labels as written by e.g. SPSS
+sets the "labels" attribute
 }
