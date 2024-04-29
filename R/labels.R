@@ -70,13 +70,11 @@ setvl <- function(x, labs) {
             stop("Labels are not equal in length to x and contains no mariables to match on")
         } else {
             x <- setvl_helper_add_partial(x, labs)
-            return(x)
         }
     } else {
         if (!checkmate::testAtomicVector(labs, names = "named")) {
             warning("Labels are not a named vector; assigning based on order")
             x <- setvl_helper_add_unnamed(x, labs)
-            return(x)
         } else {
             attr(x, "labels") <- labs
         }
