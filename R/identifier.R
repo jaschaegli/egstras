@@ -9,10 +9,10 @@
 #' @export
 
 make_ids <- function(df, prefix = NULL, num_digits = NULL, randomise = TRUE) {
-    checkmate::qassert(df, "D")
-    checkmate::qassert(num_digits, c("x", "0"))
-    checkmate::qassert(prefix, c("s", "0"))
-    checkmate::qassert(randomise, "b")
+    checkmate::qassert(df, "d") # Data frame
+    checkmate::qassert(num_digits, c("x", "0")) # Integerish, NA or NULL
+    checkmate::qassert(prefix, c("s1", "0")) # String of length 1 or NULL
+    checkmate::qassert(randomise, "B") # Boolean
 
     nums <- seq_len(nrow(df))
 
