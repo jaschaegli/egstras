@@ -4,7 +4,7 @@
 
 In an R session 
 ```R
-install.packages(install.packages(c("devtools", "keyring")))
+install.packages(c("devtools", "keyring"))
 
 keyring::key_set("gitlab.uzh")
 ```
@@ -15,4 +15,4 @@ Paste your personal access token into the "password" field when prompted. Then:
 devtools::install_gitlab("jaschamax.egli/egstras", host = "gitlab.uzh.ch", auth_token = keyring::key_get("gitlab.uzh"))
 ```
 
-To update the package in the future, simply run the command above again. Keyring will remember your token. 
+To update the package in the future, simply run the command above again. `keyring` will remember your token. 
