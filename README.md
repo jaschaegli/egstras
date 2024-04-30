@@ -1,6 +1,6 @@
 # Installation
 
-- Go to [https://gitlab.uzh.ch/-/user_settings/personal_access_tokens](https://gitlab.uzh.ch/-/user_settings/personal_access_tokens) and generate a personal access token if you do not have one already
+- Go to [https://gitlab.uzh.ch/-/user_settings/personal_access_tokens](https://gitlab.uzh.ch/-/user_settings/personal_access_tokens) and generate a personal access token if you do not have one already. `read_api` and `api` scopes both work for this. 
 
 In an R session 
 ```R
