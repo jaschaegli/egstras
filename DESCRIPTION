@@ -10,8 +10,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports: 
     checkmate,
+    cli,
     data.table,
-    pipebind
+    glue,
+    pipebind,
+    rlang
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
