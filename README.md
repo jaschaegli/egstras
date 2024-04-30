@@ -15,5 +15,4 @@ Paste your personal access token into the "password" field when prompted. Then:
 devtools::install_gitlab("jaschamax.egli/egstras", host = "gitlab.uzh.ch", auth_token = keyring::key_get("gitlab.uzh"))
 ```
 
-
-
+To update the package in the future, simply run the command above again. Keyring will remember your token. 
