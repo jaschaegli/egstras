@@ -18,9 +18,9 @@ classify(
 \item{x}{A vector to classify}
 
 \item{matchdf}{A data frame containing at minimum a column with regular expressions and a
-column with associated factor levels. If the regex contains escape sequences (e.g. "\\n"),
+column with associated factor levels. If the regex contains escape sequences (e.g. "\\\\n"),
 the expression must either be wrapped in backticks instead of double quotes (see \code{\link[=add_backticks]{add_backticks()}}),
-or escaped again (e.g. "\\\\n") before being fed to the function}
+or escaped again (e.g. "\\\\\\\\n") before being fed to the function}
 
 \item{col.regex}{The name of the column in matchdf holding regular expressions}
 

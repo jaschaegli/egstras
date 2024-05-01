@@ -3,9 +3,9 @@
 #' @return A list with two components: "recoded" contains a vector of factors, "replacements" contains a data.frame of distinct replacement operations.
 #' @param x A vector to classify
 #' @param matchdf A data frame containing at minimum a column with regular expressions and a
-#' column with associated factor levels. If the regex contains escape sequences (e.g. "\\n"),
+#' column with associated factor levels. If the regex contains escape sequences (e.g. "\\\\n"),
 #' the expression must either be wrapped in backticks instead of double quotes (see [add_backticks()]),
-#' or escaped again (e.g. "\\\\n") before being fed to the function
+#' or escaped again (e.g. "\\\\\\\\n") before being fed to the function
 #' @param col.regex The name of the column in matchdf holding regular expressions
 #' @param col.factor The name of the column in matchdf which holds the factor levels
 #' @param fallback The factor level to assign when no match is found; defaults to "Other/Unsortable"
