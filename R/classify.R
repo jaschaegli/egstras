@@ -10,8 +10,8 @@
 
 
 classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsortable") {
-    qassert(x, "s+") # string of length 1+, NAs ok
-    qassert(matchdf, "d") # data frame, NAs ok
+    checkmate::qassert(x, "s+") # string of length 1+, NAs ok
+    checkmate::qassert(matchdf, "d") # data frame, NAs ok
 
     col.factor <- rlang::ensym(col.factor)
     col.regex <- rlang::ensym(col.regex)
