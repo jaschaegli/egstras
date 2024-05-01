@@ -11,6 +11,9 @@ remove_whitespace <- function(x) {
         trimws() |>
         gsub("\\n+", " ", x = _) |>
         gsub("\\s+", " ", x = _)
+}
+
+
 
     # Reset formals
     formals(gsub)$perl <- FALSE
