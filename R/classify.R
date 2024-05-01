@@ -27,10 +27,7 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
 
     # Sanitise input: Cut double spaces, newlines, excess whitespace
 
-    x <- x |>
-        trimws() |>
-        gsub("\\n+", " ", x = _) |>
-        gsub("\\s+", " ", x = _)
+    x <- remove_whitespace(x)
 
 
     rgx <- matchdf[[col.regex]]
