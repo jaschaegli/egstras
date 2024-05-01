@@ -83,8 +83,5 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
 
     outlist <- list("recoded" = y, "replacements" = distinctrep)
 
-    formals(grepl)$ignore.case <- FALSE
-    formals(grepl)$perl <- FALSE
-
     invisible(outlist)
 }
