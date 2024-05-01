@@ -1,6 +1,6 @@
 #' Return factors based on regular expression matches on an input vector
 #'
-#'
+#' Outputs a list with two components: "recoded" contains a vector of factors, "replacements" contains a data.frame of distinct replacement operations
 #' @param x a vector to classify
 #' @param matchdf a data frame containing at minimum a column with regular expressions and a column with associated factor levels
 #' @param col.regex name of the column in matchdf which holds the regular expressions
