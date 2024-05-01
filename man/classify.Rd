@@ -4,18 +4,36 @@
 \alias{classify}
 \title{Return factors based on regular expression matches on an input vector}
 \usage{
-classify(x, matchdf, col.regex, col.factor, fallback = "Other/Unsortable")
+classify(
+  x,
+  matchdf,
+  col.regex,
+  col.factor,
+  fallback = "Other/Unsortable",
+  use_perl = TRUE,
+  ignore_case = TRUE
+)
 }
 \arguments{
-\item{x}{a vector to classify}
+\item{x}{A vector to classify}
 
-\item{matchdf}{a data frame containing at minimum a column with regular expressions and a column with associated factor levels}
+\item{matchdf}{A data frame containing at minimum a column with regular expressions and a
+column with associated factor levels. If the regex contains escape sequences (e.g. "\\n"),
+the expression must either be wrapped in backticks instead of double quotes (see \code{\link[=add_backticks]{add_backticks()}}),
+or escaped again (e.g. "\\\\n") before being fed to the function}
 
-\item{col.regex}{name of the column in matchdf which holds the regular expressions}
+\item{col.regex}{The name of the column in matchdf holding regular expressions}
 
-\item{col.factor}{name of the column in matchdf which holds the factor levels}
+\item{col.factor}{The name of the column in matchdf which holds the factor levels}
 
 \item{fallback}{The factor level to assign when no match is found; defaults to "Other/Unsortable"}
+
+\item{use_perl}{Whether to treat the strings in col.regex as PCRE-compatible regular expressions (default: TRUE)}
+
+\item{ignore_case}{Whether to ignore capitalisation when parsing the regex (default: TRUE)}
+}
+\value{
+A list with two components: "recoded" contains a vector of factors, "replacements" contains a data.frame of distinct replacement operations.
 }
 \description{
 Return factors based on regular expression matches on an input vector
