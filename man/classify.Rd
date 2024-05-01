@@ -38,3 +38,6 @@ A list with two components: "recoded" contains a vector of factors, "replacement
 \description{
 Return factors based on regular expression matches on an input vector
 }
+\seealso{
+\code{\link[data.table:fcase]{data.table::fcase()}}, which this function uses under the hood
+}

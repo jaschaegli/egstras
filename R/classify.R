@@ -11,6 +11,7 @@
 #' @param fallback The factor level to assign when no match is found; defaults to "Other/Unsortable"
 #' @param use_perl Whether to treat the strings in col.regex as PCRE-compatible regular expressions (default: TRUE)
 #' @param ignore_case Whether to ignore capitalisation when parsing the regex (default: TRUE)
+#' @seealso [data.table::fcase()], which this function uses under the hood
 #' @export
 
 
