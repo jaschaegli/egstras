@@ -2,9 +2,12 @@
 % Please edit documentation in R/strings.R
 \name{remove_backticks}
 \alias{remove_backticks}
+\alias{backticks_remove}
 \title{Remove backticks from strings}
 \usage{
 remove_backticks(x, add_quotes = TRUE)
+
+backticks_remove(x, add_quotes = TRUE)
 }
 \arguments{
 \item{x}{a vector to remove backticks from}

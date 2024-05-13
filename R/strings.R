@@ -39,6 +39,10 @@ add_backticks <- function(x, remove_outer = TRUE) {
     return(x)
 }
 
+#' @rdname add_backticks
+#' @export
+backticks_add <- add_backticks
+
 
 
 #' Remove backticks from strings
@@ -66,3 +70,7 @@ remove_backticks <- function(x, add_quotes = TRUE) {
     }
     return(x)
 }
+
+#' @rdname remove_backticks
+#' @export
+backticks_remove <- remove_backticks

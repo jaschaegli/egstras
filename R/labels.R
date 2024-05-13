@@ -14,6 +14,10 @@ getvl <- function(x, textonly = FALSE) {
     return(out)
 }
 
+#' @rdname getvl
+#' @export
+vl_get <- getvl
+
 
 
 #' Set value labels for matching args
@@ -89,6 +93,11 @@ setvl <- function(x, labs) {
     return(x)
 }
 
+#' @rdname setvl
+#' @export
+vl_set <- setvl
+
+
 
 
 #' Get variable label
@@ -103,6 +112,10 @@ getcl <- function(x) {
     return(out)
 }
 
+#' @rdname getcl
+#' @export
+cl_get <- getcl
+
 
 
 #' Set variable label
@@ -116,3 +129,7 @@ setcl <- function(x, lab) {
     attr(x, "label") <- lab
     return(x)
 }
+
+#' @rdname setcl
+#' @export
+cl_set <- setcl

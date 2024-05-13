@@ -2,9 +2,12 @@
 % Please edit documentation in R/strings.R
 \name{add_backticks}
 \alias{add_backticks}
+\alias{backticks_add}
 \title{Add backticks to strings}
 \usage{
 add_backticks(x, remove_outer = TRUE)
+
+backticks_add(x, remove_outer = TRUE)
 }
 \arguments{
 \item{x}{a vector to add backticks to}
