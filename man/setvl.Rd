@@ -2,9 +2,12 @@
 % Please edit documentation in R/labels.R
 \name{setvl}
 \alias{setvl}
+\alias{vl_set}
 \title{Set value labels}
 \usage{
 setvl(x, labs)
+
+vl_set(x, labs)
 }
 \arguments{
 \item{x}{a vector to be labelled}

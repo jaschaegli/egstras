@@ -2,9 +2,12 @@
 % Please edit documentation in R/labels.R
 \name{setcl}
 \alias{setcl}
+\alias{cl_set}
 \title{Set variable label}
 \usage{
 setcl(x, lab)
+
+cl_set(x, lab)
 }
 \arguments{
 \item{x}{a vector to be labelled}

@@ -2,9 +2,12 @@
 % Please edit documentation in R/labels.R
 \name{getvl}
 \alias{getvl}
+\alias{vl_get}
 \title{Get value labels}
 \usage{
 getvl(x, textonly = FALSE)
+
+vl_get(x, textonly = FALSE)
 }
 \arguments{
 \item{x}{a labelled vector}

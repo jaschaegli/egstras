@@ -2,9 +2,12 @@
 % Please edit documentation in R/labels.R
 \name{getcl}
 \alias{getcl}
+\alias{cl_get}
 \title{Get variable label}
 \usage{
 getcl(x)
+
+cl_get(x)
 }
 \arguments{
 \item{x}{a labelled vector}
