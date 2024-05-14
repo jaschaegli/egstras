@@ -51,9 +51,9 @@ backticks_add <- add_backticks
 #' @param x a vector to remove backticks from
 #' @param add_quotes a boolean indicating whether backticks should be replaced with double quotes (default) or simply removed
 #' @examples
-#' x <- c(`these are`, `some strings`)
+#' x <- c("these are", "some strings")
 #'
-#' remove_backticks(x)
+#' x <- add_backticks(x)
 #'
 #' remove_backticks(x, add_quotes = FALSE)
 #' @export
