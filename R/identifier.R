@@ -1,7 +1,9 @@
 #' Create response or respondent IDs
 #'
 #' @param x an R object provided by a native pipe ( |> )
-#' @param ... arguments
+#' @param prefix String to prefix the IDs with
+#' @param num_digits Number of numeric digits to construct
+#' @param randomise Whether to randomise the order of the input object when constructing IDs
 #' @examples
 #' df <- data.frame(runif(50), runif(50))
 #' make_ids(df)
