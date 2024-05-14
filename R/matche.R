@@ -2,7 +2,7 @@
 #'
 #' @param x a vector to compare
 #' @param y a vector to compare x with
-#' @param return the desired output format; can be "logical", "factor", "labelled", "numeric"
+#' @param output the desired output format; can be "logical", "factor", "labelled", "numeric"
 #' @param nahandle what to do with missing values in x; can be "keep" (the return vector will be NA for this element), or "false" (treated like a non-match)
 #' @param levels labels for the output vector; defaults to "No" and "Yes"; will be ignored unless return is "factor", or "labelled"
 #' @param label an optional "label" attribute for the output vector
