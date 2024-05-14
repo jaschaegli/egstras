@@ -9,7 +9,7 @@
 #' @export
 
 namecheck <- function(x) {
-    noname <- allNames(x) == ""
+    noname <- methods::allNames(x) == ""
 
     res <- data.table::fcase(
         all(noname == TRUE), "none_named",
