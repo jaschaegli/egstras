@@ -16,6 +16,6 @@ Create response or respondent IDs
 }
 \examples{
 df <- data.frame(runif(50), runif(50))
-make_ids()
+make_ids(df)
 
 }

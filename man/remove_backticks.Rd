@@ -18,9 +18,9 @@ backticks_remove(x, add_quotes = TRUE)
 Simple wrapper for \code{\link[=gsub]{gsub()}}
 }
 \examples{
-x <- c(`these are`, `some strings`)
+x <- c("these are", "some strings")
 
-remove_backticks(x)
+x <- add_backticks(x)
 
 remove_backticks(x, add_quotes = FALSE)
 }
