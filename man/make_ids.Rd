@@ -7,9 +7,13 @@
 make_ids(df, prefix = NULL, num_digits = NULL, randomise = TRUE)
 }
 \arguments{
-\item{x}{an R object provided by a native pipe ( |> )}
+\item{prefix}{String to prefix the IDs with}
 
-\item{...}{arguments}
+\item{num_digits}{Number of numeric digits to construct}
+
+\item{randomise}{Whether to randomise the order of the input object when constructing IDs}
+
+\item{x}{an R object provided by a native pipe ( |> )}
 }
 \description{
 Create response or respondent IDs
