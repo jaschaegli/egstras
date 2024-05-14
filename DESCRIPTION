@@ -2,23 +2,23 @@ Package: egstras
 Title: Some tools
 Version: 0.3.2
 Authors@R: 
-    person("Jascha", "Egli", email = "jaschamax.egli@uzh.ch", role = c("aut", "cre"))
+    person("Jascha", "Egli", , "jaschamax.egli@uzh.ch", role = c("aut", "cre"))
 Description: Collection of utility functions
 License: GPL (>= 3)
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
 Depends:
-  R (>= 4.1)
+    R (>= 4.1)
 Imports: 
     checkmate,
     cli,
     data.table,
     glue,
+    methods,
     pipebind,
     rlang,
-    methods,
     stats
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
