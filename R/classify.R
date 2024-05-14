@@ -74,7 +74,7 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
         ) |>
         data.frame()
 
-    distinctrep <- na.omit(replaced[!(duplicated(replaced)), ])
+    distinctrep <- stats::na.omit(replaced[!(duplicated(replaced)), ])
 
     cli::cli_div(theme = list(span.instruct = list(color = "#f5da0f")))
     cli::cli_text(

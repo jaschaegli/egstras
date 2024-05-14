@@ -24,11 +24,11 @@ vl_get <- getvl
 #'
 #' @keywords internal
 setvl_helper_add_partial <- function(x, labs) {
-    if (!all(labs %in% unique(na.omit(x)))) {
+    if (!all(labs %in% unique(stats::na.omit(x)))) {
         warning("some labels are not present in x, and will be ignored")
     }
     labs_missing <- x[which(!x %in% labs)]
-    nums_as_labs <- setNames(labs_missing, nm = as.character(labs_missing))
+    nums_as_labs <- stats::setNames(labs_missing, nm = as.character(labs_missing))
     labs <- sort(c(nums_as_labs, labs))
     attr(x, "labels") <- sort(labs)
 
@@ -41,8 +41,8 @@ setvl_helper_add_partial <- function(x, labs) {
 #'
 #' @keywords internal
 setvl_helper_add_unnamed <- function(x, labs) {
-    labs <- setNames(
-        sort(unique(as.numeric(na.omit(x)))),
+    labs <- stats::setNames(
+        sort(unique(as.numeric(stats::na.omit(x)))),
         nm = labs
     )
     attr(x, "labels") <- labs
@@ -66,7 +66,7 @@ setvl <- function(x, labs) {
         stop("Labels may not mix named and unnamed elements")
     }
 
-    ulen <- length(unique(na.omit(x)))
+    ulen <- length(unique(stats::na.omit(x)))
     labsnamed <- checkmate::testAtomicVector(labs, names = "named")
 
     if (
