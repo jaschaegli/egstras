@@ -6,7 +6,7 @@
 #' @export
 
 getvl <- function(x, textonly = FALSE) {
-    qassert(x, "V>=2") # Atomic vector of length >= 2, no NAs
+    qassert(x, "v") # Atomic vector
     out <- attr(x, "labels")
     if (textonly == TRUE) {
         out <- names(out)
