@@ -19,7 +19,7 @@ make_ids(df, prefix = NULL, num_digits = NULL, randomise = TRUE)
 Create response or respondent IDs
 }
 \examples{
-df <- data.frame(runif(50), runif(50))
-make_ids(df)
+df <- data.frame(stats::runif(50), stats::runif(50))
+egstras::make_ids(df)
 
 }

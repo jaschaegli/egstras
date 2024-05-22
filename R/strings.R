@@ -23,9 +23,9 @@ remove_whitespace <- function(x) {
 #' @examples
 #' x <- c("these are", "some strings")
 #'
-#' add_backticks(x)
+#' egstras::add_backticks(x)
 #'
-#' add_backticks(x, remove_outer = FALSE)
+#' egstras::add_backticks(x, remove_outer = FALSE)
 #' @export
 #'
 add_backticks <- function(x, remove_outer = TRUE) {
@@ -53,9 +53,9 @@ backticks_add <- add_backticks
 #' @examples
 #' x <- c("these are", "some strings")
 #'
-#' x <- add_backticks(x)
+#' x <- egstras::add_backticks(x)
 #'
-#' remove_backticks(x, add_quotes = FALSE)
+#' egstras::remove_backticks(x, add_quotes = FALSE)
 #' @export
 #'
 #'

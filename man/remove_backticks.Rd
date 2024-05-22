@@ -20,7 +20,7 @@ Simple wrapper for \code{\link[=gsub]{gsub()}}
 \examples{
 x <- c("these are", "some strings")
 
-x <- add_backticks(x)
+x <- egstras::add_backticks(x)
 
-remove_backticks(x, add_quotes = FALSE)
+egstras::remove_backticks(x, add_quotes = FALSE)
 }
