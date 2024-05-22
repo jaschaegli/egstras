@@ -4,9 +4,16 @@
 \name{egstras-package}
 \alias{egstras}
 \alias{egstras-package}
-\title{egstras: Some tools}
+\title{egstras: egstras}
 \description{
-Collection of utility functions
+A colllection of utility functions developed for the DDS 21 research project.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://gitlab.uzh.ch/jaschamax.egli/egstras}
+}
+
 }
 \author{
 \strong{Maintainer}: Jascha Egli \email{jaschamax.egli@uzh.ch}

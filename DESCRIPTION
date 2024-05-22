@@ -1,10 +1,12 @@
 Package: egstras
-Title: Some tools
+Title: egstras
 Version: 0.3.2
 Authors@R: 
     person("Jascha", "Egli", , "jaschamax.egli@uzh.ch", role = c("aut", "cre"))
-Description: Collection of utility functions
+Description: A colllection of utility functions developed for the DDS 21
+    research project.
 License: GPL (>= 3)
+URL: https://gitlab.uzh.ch/jaschamax.egli/egstras
 Depends:
     R (>= 4.1)
 Imports: 
@@ -13,9 +15,13 @@ Imports:
     data.table,
     glue,
     methods,
+    pedant,
     pipebind,
+    renv,
     rlang,
     stats
+Remotes: 
+    wurli/pedant
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
