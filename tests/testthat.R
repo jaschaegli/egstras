@@ -10,4 +10,4 @@ library(testthat)
 library(egstras)
 library(checkmate)
 
-test_check("egstras")
+testthat::test_check("egstras")

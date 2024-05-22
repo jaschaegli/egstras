@@ -43,7 +43,7 @@ make_matchcheck <- function(
     if (output == "labelled") {
         checkvec <- as.numeric(checkvec)
         lab <- stats::setNames(sort(unique(stats::na.omit(checkvec))), nm = levels)
-        checkvec <- setvl(checkvec, lab)
+        checkvec <- egstras::setvl(checkvec, lab)
     }
 
 

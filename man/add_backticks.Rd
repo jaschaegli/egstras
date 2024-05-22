@@ -20,7 +20,7 @@ Wrapper for \code{\link[=encodeString]{encodeString()}} and (optionally) \code{\
 \examples{
 x <- c("these are", "some strings")
 
-add_backticks(x)
+egstras::add_backticks(x)
 
-add_backticks(x, remove_outer = FALSE)
+egstras::add_backticks(x, remove_outer = FALSE)
 }
