@@ -5,15 +5,18 @@
 \alias{vl_set}
 \title{Set value labels}
 \usage{
-setvl(x, labs)
+setvl(x, labs, fill_partial = TRUE)
 
-vl_set(x, labs)
+vl_set(x, labs, fill_partial = TRUE)
 }
 \arguments{
 \item{x}{a vector to be labelled}
 
-\item{labs}{a vector containing labels; either an unnamed character vector of
-equal in length to the number of unique elements of x,}
+\item{labs}{a vector containing labels; either an unnamed character vector
+equal in length to the number of unique elements of x, or a named vector}
+
+\item{fill_partial}{A boolean indicating whether to force-construct "missing" (unspecified) labels by recycling numerical values.
+Only applicable when labs is a named vector with fewer elements than there are unique values in x.}
 }
 \description{
 sets the "labels" attribute
