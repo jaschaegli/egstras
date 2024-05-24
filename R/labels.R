@@ -64,7 +64,7 @@ setvl <- function(x, labs, fill_partial = TRUE) {
     checkmate::qassert(x, "x") # Integerish, NAs ok
     checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
 
-    if (egstras::namecheck(labs) == "some_named") {
+    if (namecheck(labs) == "some_named") {
         stop("Labels may not mix named and unnamed elements")
     }
 

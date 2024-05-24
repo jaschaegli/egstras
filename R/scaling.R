@@ -9,7 +9,7 @@
 #' vec <- c(1, 50, 30)
 #' summary(vec)
 #'
-#' rescaled <- egstras::center_vector(vec, mean = 10)
+#' rescaled <- center_vector(vec, mean = 10)
 #' summary(rescaled)
 #' @export
 

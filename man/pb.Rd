@@ -16,6 +16,6 @@ Allows for unnamed positional argument use similar to magrittr
 }
 \examples{
 c <- c("some", "text")
-c |> egstras::pb(grep("some", .))
+c |> pb(grep("some", .))
 
 }

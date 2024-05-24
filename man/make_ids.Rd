@@ -20,6 +20,6 @@ Create response or respondent IDs
 }
 \examples{
 df <- data.frame(stats::runif(50), stats::runif(50))
-egstras::make_ids(df)
+make_ids(df)
 
 }
