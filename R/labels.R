@@ -55,10 +55,12 @@ setvl_helper_add_unnamed <- function(x, labs) {
 #'
 #' sets the "labels" attribute
 #' @param x a vector to be labelled
-#' @param labs a vector containing labels; either an unnamed character vector of
-#' equal in length to the number of unique elements of x,
+#' @param labs a vector containing labels; either an unnamed character vector
+#' equal in length to the number of unique elements of x, or a named vector
+#' @param fill_partial A boolean indicating whether to force-construct "missing" (unspecified) labels by recycling numerical values.
+#' Only applicable when labs is a named vector with fewer elements than there are unique values in x.
 #' @export
-setvl <- function(x, labs) {
+setvl <- function(x, labs, fill_partial = TRUE) {
     checkmate::qassert(x, "x") # Integerish, NAs ok
     checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
 
@@ -79,6 +81,8 @@ setvl <- function(x, labs) {
     if (!length(labs) == ulen) {
         if (!any(labs %in% x)) {
             stop("Labels are not equal in length to x and contain no variables to match on")
+        } else if (fill_partial == FALSE) {
+            attr(x, "labels") <- labs
         } else {
             x <- setvl_helper_add_partial(x, labs)
         }
