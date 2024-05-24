@@ -18,10 +18,9 @@ flip_integer <- function(vec) {
     clab <- egstras::getcl(vec)
     vlab <- egstras::getvl(vec)
 
+    x <- vec
 
-    vn <- deparse(substitute(vec))
-
-    conditions_raw <- glue::glue("{vn} == {minv:maxv}; {maxv:minv}")
+    conditions_raw <- glue::glue("x == {minv:maxv}; {maxv:minv}")
 
     conditions_parsed <- lapply(conditions_raw, rlang::parse_exprs) |> unlist()
 
@@ -35,15 +34,11 @@ flip_integer <- function(vec) {
     flipped <- eval(call_parsed)
 
     if (!is.null(vlab) || !is.null(clab)) {
-        flipped <- egstras::setvl(
-            flipped,
-            labs =
-                setNames(
-                    unname(vlab),
-                    nm = rev(names(vlab))
-                ),
-            fill_partial = FALSE
-        )
+        attr(flipped, "labels") <-
+            setNames(
+                unname(vlab),
+                nm = rev(names(vlab))
+            )
     }
 
     if (!is.null(clab)) {
