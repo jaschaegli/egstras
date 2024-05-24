@@ -108,7 +108,7 @@ vl_set <- setvl
 
 getcl <- function(x) {
     checkmate::qassert(x, "v") # Atomic vector, NAs ok
-    out <- attr(x, "label")
+    out <- attr(x, "label", exact = TRUE)
     return(out)
 }
 
