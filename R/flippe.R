@@ -11,13 +11,17 @@ flip_integer <- function(vec) {
 
     class_old <- class(vec)
 
+    minv <- as.integer(min(vec, na.rm = TRUE))
+    maxv <- as.integer(max(vec, na.rm = TRUE))
+
+
     clab <- egstras::getcl(vec)
     vlab <- egstras::getvl(vec)
 
 
     vn <- deparse(substitute(vec))
 
-    conditions_raw <- glue::glue("{vn} == {min(vec):max(vec)}; {max(vec):min(vec)}")
+    conditions_raw <- glue::glue("{vn} == {minv:maxv}; {maxv:minv}")
 
     conditions_parsed <- lapply(conditions_raw, rlang::parse_exprs) |> unlist()
 
