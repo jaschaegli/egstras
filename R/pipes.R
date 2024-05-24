@@ -5,7 +5,7 @@
 #' @param ... arguments
 #' @examples
 #' c <- c("some", "text")
-#' c |> egstras::pb(grep("some", .))
+#' c |> pb(grep("some", .))
 #'
 #' @export
 

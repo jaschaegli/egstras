@@ -15,8 +15,8 @@ flip_integer <- function(vec) {
     maxv <- as.integer(max(vec, na.rm = TRUE))
 
 
-    clab <- egstras::getcl(vec)
-    vlab <- egstras::getvl(vec)
+    clab <- getcl(vec)
+    vlab <- getvl(vec)
 
     x <- vec
 
@@ -42,7 +42,7 @@ flip_integer <- function(vec) {
     }
 
     if (!is.null(clab)) {
-        flipped <- egstras::setcl(flipped, clab)
+        flipped <- setcl(flipped, clab)
     }
 
 

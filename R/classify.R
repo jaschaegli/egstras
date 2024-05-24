@@ -4,7 +4,7 @@
 #' @param x A vector to classify
 #' @param matchdf A data frame containing at minimum a column with regular expressions and a
 #' column with associated factor levels. If the regex contains escape sequences (e.g. "\\\\n"),
-#' the expression must either be wrapped in backticks instead of double quotes (see [egstras::add_backticks()]),
+#' the expression must either be wrapped in backticks instead of double quotes (see [add_backticks()]),
 #' or escaped again (e.g. "\\\\\\\\n") before being fed to the function
 #' @param col.regex The name of the column in matchdf holding regular expressions
 #' @param col.factor The name of the column in matchdf which holds the factor levels
@@ -35,11 +35,11 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
 
     # Sanitise input: Cut double spaces, newlines, excess whitespace
 
-    x <- egstras::remove_whitespace(x)
+    x <- remove_whitespace(x)
 
 
     rgx <- matchdf[[col.regex]] |>
-        egstras::remove_backticks(x = _, add_quotes = FALSE)
+        remove_backticks(x = _, add_quotes = FALSE)
     fct <- matchdf[[col.factor]]
 
 
