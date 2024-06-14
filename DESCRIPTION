@@ -1,6 +1,6 @@
 Package: egstras
 Title: egstras
-Version: 0.6.0
+Version: 0.6.1
 Authors@R: 
     person("Jascha", "Egli", , "jaschamax.egli@uzh.ch", role = c("aut", "cre"))
 Description: A colllection of utility functions developed for the DDS 21
