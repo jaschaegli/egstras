@@ -137,3 +137,31 @@ setcl <- function(x, lab) {
 #' @rdname setcl
 #' @export
 cl_set <- setcl
+
+
+
+#' Modify specific value labels by name
+#'
+#' @param x a vector to be relabelled
+#' @param reps a named vector in the format c("To be replaced" = "Replacement")
+#' @export
+modvl <- function(x, reps) {
+    oldlabs <- attr(x, "labels")
+
+    newlabs <-
+        setNames(
+            unname(oldlabs),
+            plyr::revalue(
+                x = names(oldlabs),
+                replace = reps
+            )
+        )
+
+
+    attr(x, "labels") <- newlabs
+    return(x)
+}
+
+#' @rdname modvl
+#' @export
+vl_mod <- modvl

@@ -14,6 +14,7 @@
 #' @importFrom methods allNames
 #' @importFrom pedant add_double_colons
 #' @importFrom pipebind bind
+#' @importFrom plyr revalue
 #' @importFrom renv dependencies
 #' @importFrom rlang ensym
 #' @importFrom rlang expr
