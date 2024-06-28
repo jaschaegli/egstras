@@ -44,6 +44,8 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
 
     categorized_output <- character(length(x))
 
+    categorized_output[is.na(x)] <- NA
+
     for (j in seq_along(rgx)) {
         matches <- grepl(rgx[j], x, perl = TRUE, ignore.case = TRUE)
         categorized_output[matches] <- fct[j]
