@@ -42,30 +42,16 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
         remove_backticks(x = _, add_quotes = FALSE)
     fct <- matchdf[[col.factor]]
 
+    categorized_output <- character(length(x))
 
-    ### Unleash the metaprogramming
+    for (j in seq_along(rgx)) {
+        matches <- grepl(rgx[j], x, perl = TRUE, ignore.case = TRUE)
+        categorized_output[matches] <- fct[j]
+    }
 
-    # Glue all fcase arguments. The comma is substituted with a semicolon because
-    # these are technically two expressions: Arg and Return
-    greps <- glue::glue('grepl(pattern = "{rgx}", x = x) == TRUE; "{fct}"')
+    categorized_output[categorized_output == ""] <- fallback
 
-    # rlang::parse expr returns a list of lists, so we have to unlist once before injecting
-    ag <- lapply(greps, rlang::parse_exprs) |> unlist()
-
-
-    # Frame expression with injected grep arguments
-    expr <- rlang::expr(
-        data.table::fcase(
-            !!!ag,
-            is.na(x) | x == "", "SETMETONA", # fcase can't mix returns, so we use a dummy NA
-            default = fallback
-        )
-    )
-
-    # Run
-    y <- eval(expr)
-
-    y[y == "SETMETONA"] <- NA
+    y <- categorized_output
 
     replaced <-
         cbind(
@@ -85,8 +71,8 @@ classify <- function(x, matchdf, col.regex, col.factor, fallback = "Other/Unsort
     )
     cli::cli_end()
     print(distinctrep)
-
-    y <- factor(y)
+    
+    y <- factor(y, levels = c(fct, fallback))
 
     outlist <- list("recoded" = y, "replacements" = distinctrep)
 
