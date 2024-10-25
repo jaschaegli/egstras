@@ -54,7 +54,7 @@ expl_filepick <- function(filesfrom, rgx_filesubset) {
 explicitise <- function(filesfrom = c("git", "wd"), rgx_filesubset = "\\.R$", ...) {
     filesfrom <- match.arg(filesfrom)
 
-    file <- expl_filepick(filesfrom)
+    file <- expl_filepick(filesfrom, rgx_filesubset)
 
     deps <- renv::dependencies(path = getwd(), quiet = TRUE)[, "Package"] |>
         unique() |>
