@@ -32,7 +32,7 @@ expl_filepick <- function(filesfrom, rgx_filesubset) {
     }
 
     if (filesfrom == "wd") {
-        rawlist <- expl_rlwd
+        rawlist <- expl_rlwd()
     }
 
     filelist <- rawlist |>
@@ -72,6 +72,6 @@ explicitise <- function(filesfrom = c("git", "wd"), rgx_filesubset = "\\.R$", ..
     }
 
     lapply(file, \(x) {
-        toexplicit(x)
+        toexplicit(x, dependencies = deps)
     })
 }
