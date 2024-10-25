@@ -52,7 +52,7 @@ expl_filepick <- function(filesfrom, rgx_filesubset) {
 #' @export
 
 explicitise <- function(filesfrom = c("git", "wd"), rgx_filesubset = "\\.R$", ...) {
-    filesfrom <- match.args(filesfrom)
+    filesfrom <- match.arg(filesfrom)
 
     file <- expl_filepick(filesfrom)
 
