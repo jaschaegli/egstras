@@ -16,10 +16,16 @@
 #'   `"EM"`.
 #' @param fscores_method Method passed to [mirt::fscores()]. Default is
 #'   `"EAP"`.
-#'
+#' @param return_model Logical indicating whether the fitted IRT model should2#'   be returned alongside the data. Defaults to `FALSE`.
 #' @return
-#' A copy of `data` with an additional numeric variable containing respondent
-#' theta estimates.
+#' If `return_model = FALSE` (default), a data frame with an additional theta
+#' variable.
+#'
+#' If `return_model = TRUE`, a list with elements:
+#' \describe{
+#'   \item{data}{The input data with appended theta estimates.}
+#'   \item{model}{The fitted \code{mirt} 2PL model object.}
+#' }
 #'
 #' @details
 #' A one-factor 2PL model is fitted using [mirt::mirt()] with
@@ -60,7 +66,8 @@ fit_irt_theta <- function(
     cols,
     theta_name = "theta",
     method = "EM",
-    fscores_method = "EAP"
+    fscores_method = "EAP",
+    return_model = FALSE
 ) {
     item_names <- names(
         dplyr::select(data, {{ cols }})
@@ -99,6 +106,15 @@ fit_irt_theta <- function(
     )
 
     data[[theta_name]] <- theta
+
+    if (return_model) {
+        return(
+            list(
+                data = data,
+                model = model
+            )
+        )
+    }
 
     data
 }
