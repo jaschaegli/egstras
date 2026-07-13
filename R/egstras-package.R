@@ -2,6 +2,9 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @import dplyr
+#' @import tidyselect
+#' @import rlang
 #' @importFrom checkmate assertAtomicVector
 #' @importFrom checkmate qassert
 #' @importFrom checkmate testAtomicVector
@@ -11,15 +14,18 @@
 #' @importFrom cli cli_text
 #' @importFrom data.table fcase
 #' @importFrom glue glue
+#' @importFrom haven labelled
+#' @importFrom haven labelled_spss
+#' @importFrom haven zap_missing
 #' @importFrom methods allNames
+#' @importFrom mirt mirt
+#' @importFrom mirt fscores
 #' @importFrom pedant add_double_colons
 #' @importFrom pipebind bind
 #' @importFrom plyr revalue
 #' @importFrom renv dependencies
-#' @importFrom rlang ensym
-#' @importFrom rlang expr
-#' @importFrom rlang parse_exprs
 #' @importFrom stats na.omit
 #' @importFrom stats setNames
+#' @importFrom tibble tibble
 ## usethis namespace: end
 NULL
