@@ -9,7 +9,11 @@ fit_irt_theta(
   cols,
   theta_name = "theta",
   method = "EM",
-  fscores_method = "EAP"
+  fscores_method = "EAP",
+  return_model = FALSE,
+  coerce_correct = NULL,
+  coerce_incorrect = NULL,
+  coerce_na = NULL
 )
 }
 \arguments{
@@ -25,10 +29,28 @@ variables to include in the model.}
 
 \item{fscores_method}{Method passed to \code{\link[mirt:fscores]{mirt::fscores()}}. Default is
 \code{"EAP"}.}
+
+\item{return_model}{Logical indicating whether the fitted IRT model should
+be returned alongside the data. Defaults to \code{FALSE}.}
+
+\item{coerce_correct}{Vector holding additional values that should be treated as
+1 (i.e. correct responses)}
+
+\item{coerce_incorrect}{Vector holding additional values that should be treated as
+0 (i.e. incorrect responses)}
+
+\item{coerce_na}{Vector holding additional values that should be treated as
+missings}
 }
 \value{
-A copy of \code{data} with an additional numeric variable containing respondent
-theta estimates.
+If \code{return_model = FALSE} (default), a data frame with an additional theta
+variable.
+
+If \code{return_model = TRUE}, a list with elements:
+\describe{
+\item{data}{The input data with appended theta estimates.}
+\item{model}{The fitted \code{mirt} 2PL model object.}
+}
 }
 \description{
 Fits a unidimensional two-parameter logistic (2PL) item response theory
