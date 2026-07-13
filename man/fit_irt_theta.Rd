@@ -59,7 +59,11 @@ empirical Bayes ability estimates (thetas) for all respondents.
 }
 \details{
 Items must be coded as dichotomous variables (e.g. 0 = incorrect,
-1 = correct). User-defined missing values from SPSS-labelled variables are
+1 = correct). Non-dichotomous input variables can be transformed using
+the "coerce_" arguments, which will recode values for the model computation
+but return the original columns in its original state.
+
+User-defined missing values from SPSS-labelled variables are
 automatically converted to \code{NA} prior to model fitting.
 
 A one-factor 2PL model is fitted using \code{\link[mirt:mirt]{mirt::mirt()}} with
