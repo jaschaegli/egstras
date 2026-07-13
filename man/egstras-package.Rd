@@ -6,7 +6,7 @@
 \alias{egstras-package}
 \title{egstras: egstras}
 \description{
-A colllection of utility functions developed for the DDS 21 research project.
+A collection of utility functions developed for the DDS 21 research project.
 }
 \seealso{
 Useful links:
@@ -17,6 +17,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Jascha Egli \email{jaschamax.egli@uzh.ch}
+
+Authors:
+\itemize{
+  \item Jascha Egli \email{jaschamax.egli@uzh.ch}
+}
 
 }
 \keyword{internal}
