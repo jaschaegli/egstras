@@ -94,25 +94,37 @@ fit_irt_theta <- function(
 
     if (!is.null(coerce_correct)) {
         data <- data |>
-            dplyr::across(
-                tidyselect::all_of(item_names),
-                dplyr::case_when(.x %in% coerce_correct, 1, )
+            dplyr::mutate(
+                dplyr::across(
+                    .cols = tidyselect::all_of(item_names),
+                    .fns = \(x) {
+                        dplyr::replace_when(x, x %in% coerce_correct ~ 1)
+                    }
+                )
             )
     }
 
-    if (!is.null(coerce_correct)) {
+    if (!is.null(coerce_incorrect)) {
         data <- data |>
-            dplyr::across(
-                tidyselect::all_of(item_names),
-                dplyr::case_when(.x %in% coerce_correct, 1)
+            dplyr::mutate(
+                dplyr::across(
+                    .cols = tidyselect::all_of(item_names),
+                    .fns = \(x) {
+                        dplyr::replace_when(x, x %in% coerce_incorrect ~ 0)
+                    }
+                )
             )
     }
 
     if (!is.null(coerce_na)) {
         data <- data |>
             dplyr::across(
-                tidyselect::all_of(item_names),
-                dplyr::case_when(.x %in% coerce_na, NA_real_)
+                dplyr::mutate(
+                    .cols = tidyselect::all_of(item_names),
+                    .fns = \(x) {
+                        dplyr::replace_when(x, x %in% coerce_na ~ NA_real_)
+                    }
+                )
             )
     }
 
@@ -128,19 +140,17 @@ fit_irt_theta <- function(
         )
     )
 
-    complete_rows <- rowSums(!is.na(items)) > 0
-
     theta <- rep(NA_real_, nrow(data))
 
     model <- mirt::mirt(
-        data = items[complete_rows, , drop = FALSE],
+        data = items,
         model = 1,
         itemtype = "2PL",
         method = method,
         verbose = FALSE
     )
 
-    theta[complete_rows] <- as.numeric(
+    theta <- as.numeric(
         mirt::fscores(
             model,
             method = fscores_method,
