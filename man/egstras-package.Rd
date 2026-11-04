@@ -11,7 +11,8 @@ A collection of utility functions developed for the DDS 21 research project.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://gitlab.uzh.ch/jaschamax.egli/egstras}
+  \item \url{https://github.com/jaschaegli/egstras}
+  \item Report bugs at \url{https://github.com/jaschaegli/egstras/issues}
 }
 
 }
