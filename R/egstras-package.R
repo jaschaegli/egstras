@@ -28,3 +28,6 @@
 #' @importFrom tibble tibble
 ## usethis namespace: end
 NULL
+
+# `.` is the placeholder pipebind::bind() evaluates lazily in pb()
+utils::globalVariables(".")
