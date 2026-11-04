@@ -49,7 +49,7 @@ expl_in_git <- function() {
 #' @keywords internal
 #' @noRd
 
-expl_filepick <- function(filesfrom, rgx_filesubset, rgx_exclude) {
+expl_filepick <- function(filesfrom, rgx_filesubset, rgx_exclude = NA) {
   if (filesfrom == "git" && !expl_in_git()) {
     cli::cli_inform(
       "Not inside a git work tree, falling back to all files in the working directory."
