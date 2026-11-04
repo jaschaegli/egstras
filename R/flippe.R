@@ -5,7 +5,6 @@
 #'
 #' @export
 
-
 flip_integer <- function(vec) {
     checkmate::qassert(vec, "x")
 
@@ -13,7 +12,6 @@ flip_integer <- function(vec) {
 
     minv <- as.integer(min(vec, na.rm = TRUE))
     maxv <- as.integer(max(vec, na.rm = TRUE))
-
 
     clab <- getcl(vec)
     vlab <- getvl(vec)
@@ -26,7 +24,7 @@ flip_integer <- function(vec) {
 
     call_parsed <- rlang::expr(
         data.table::fcase(
-            !!!conditions_parsed,
+            !!!conditions_parsed ,
             default = NA
         )
     )
@@ -35,7 +33,7 @@ flip_integer <- function(vec) {
 
     if (!is.null(vlab) || !is.null(clab)) {
         attr(flipped, "labels") <-
-            setNames(
+            stats::setNames(
                 unname(vlab),
                 nm = rev(names(vlab))
             )
@@ -44,7 +42,6 @@ flip_integer <- function(vec) {
     if (!is.null(clab)) {
         flipped <- setcl(flipped, clab)
     }
-
 
     class(flipped) <- class_old
     return(flipped)
