@@ -18,17 +18,15 @@ Imports:
     glue,
     haven,
     methods,
-    pedant,
     pipebind,
     plyr,
     renv,
     rlang,
-    stats, 
+    stats,
+    utils,
     tibble,
     mirt,
     tidyselect
-Remotes: 
-    wurli/pedant
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

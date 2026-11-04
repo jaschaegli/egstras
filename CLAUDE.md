@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`egstras` is a personal R utility package for the DDS 21 research project (survey data work: SPSS-labelled vectors, recoding, item scoring, IRT). Hosted on GitHub at `github.com/jaschaegli/egstras` (formerly `gitlab.uzh.ch/jaschamax.egli/egstras`, now archived); installed via `devtools::install_github("jaschaegli/egstras")`. Depends on `pedant` from GitHub (`Remotes: wurli/pedant`).
+`egstras` is a personal R utility package for the DDS 21 research project (survey data work: SPSS-labelled vectors, recoding, item scoring, IRT). Hosted on GitHub at `github.com/jaschaegli/egstras` (formerly `gitlab.uzh.ch/jaschamax.egli/egstras`, now archived); installed via `devtools::install_github("jaschaegli/egstras")`. All dependencies are on CRAN.
 
 ## Commands
 
@@ -34,5 +34,5 @@ New top-level non-package files must be added to `.Rbuildignore`, or `devtools::
 - **Labelled-vector model**: the package works on haven/SPSS-style vectors where value labels are the `"labels"` attribute and the variable label is the `"label"` attribute. [R/labels.R](R/labels.R) provides the get/set/mod helpers; other functions (e.g. `flip_integer` in [R/flippe.R](R/flippe.R)) use them to preserve labels across transformations. `score_items` outputs `haven::labelled` or `haven::labelled_spss` (when user-missing codes are given); `fit_irt_theta` applies `haven::zap_missing()` before fitting.
 - **Metaprogrammed `fcase`**: `classify` and `flip_integer` build `data.table::fcase()` calls by glueing condition/value strings, parsing them with `rlang::parse_exprs`, splicing with `!!!`, and `eval()`-ing. Regex patterns in `classify` are interpolated into code strings, so escaping matters (see backtick helpers in [R/strings.R](R/strings.R)).
 - **Tidy-select interfaces**: `score_items` and `fit_irt_theta` take `cols` via `{{ }}` and resolve names with `dplyr::select(data, {{ cols }})` before iterating.
-- `explicitise` rewrites `.R` files in the current project in place (via `renv::dependencies` + `pedant::add_double_colons`), choosing files from the current git branch or the working directory.
-- Test coverage is minimal (only `make_ids`); `tests/testthat.R` also attaches `checkmate`.
+- `explicitise` rewrites `.R` files in the current project in place, adding `pkg::` prefixes. Dependencies come from `renv::dependencies`; calls are located with `utils::getParseData` (so comments/strings are untouched) and prefixes inserted by position. Parser columns expand tabs to multiples of 8, hence `expl_col_to_index`. It refuses to rewrite files git couldn't restore unless `force = TRUE`.
+- Test coverage is minimal (`make_ids` and `explicitise`); `tests/testthat.R` also attaches `checkmate`.
