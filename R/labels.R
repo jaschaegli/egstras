@@ -6,7 +6,7 @@
 #' @export
 
 getvl <- function(x, textonly = FALSE) {
-    qassert(x, "v") # Atomic vector
+    checkmate::qassert(x, "v") # Atomic vector
     out <- attr(x, "labels")
     if (textonly == TRUE) {
         out <- names(out)
@@ -19,7 +19,6 @@ getvl <- function(x, textonly = FALSE) {
 vl_get <- getvl
 
 
-
 #' Set value labels for matching args
 #'
 #' @keywords internal
@@ -28,13 +27,15 @@ setvl_helper_add_partial <- function(x, labs) {
         warning("some labels are not present in x, and will be ignored")
     }
     labs_missing <- x[which(!x %in% labs)]
-    nums_as_labs <- stats::setNames(labs_missing, nm = as.character(labs_missing))
+    nums_as_labs <- stats::setNames(
+        labs_missing,
+        nm = as.character(labs_missing)
+    )
     labs <- sort(c(nums_as_labs, labs))
     attr(x, "labels") <- sort(labs)
 
     return(x)
 }
-
 
 
 #' Set value labels with unnamed args
@@ -48,7 +49,6 @@ setvl_helper_add_unnamed <- function(x, labs) {
     attr(x, "labels") <- labs
     return(x)
 }
-
 
 
 #' Set value labels
@@ -75,12 +75,16 @@ setvl <- function(x, labs, fill_partial = TRUE) {
         ((!length(labs) == ulen) && !labsnamed) ||
             ((length(labs) == ulen) && !is.character(labs) && !labsnamed)
     ) {
-        stop("Labels must either be a character vector of length unique(x), or a named vector")
+        stop(
+            "Labels must either be a character vector of length unique(x), or a named vector"
+        )
     }
 
     if (!length(labs) == ulen) {
         if (!any(labs %in% x)) {
-            stop("Labels are not equal in length to x and contain no variables to match on")
+            stop(
+                "Labels are not equal in length to x and contain no variables to match on"
+            )
         } else if (fill_partial == FALSE) {
             attr(x, "labels") <- labs
         } else {
@@ -102,8 +106,6 @@ setvl <- function(x, labs, fill_partial = TRUE) {
 vl_set <- setvl
 
 
-
-
 #' Get variable label
 #'
 #' Retrieves variable (column) labels
@@ -119,7 +121,6 @@ getcl <- function(x) {
 #' @rdname getcl
 #' @export
 cl_get <- getcl
-
 
 
 #' Set variable label
@@ -139,7 +140,6 @@ setcl <- function(x, lab) {
 cl_set <- setcl
 
 
-
 #' Modify specific value labels by name
 #'
 #' @param x a vector to be relabelled
@@ -149,14 +149,13 @@ modvl <- function(x, reps) {
     oldlabs <- attr(x, "labels")
 
     newlabs <-
-        setNames(
+        stats::setNames(
             unname(oldlabs),
             plyr::revalue(
                 x = names(oldlabs),
                 replace = reps
             )
         )
-
 
     attr(x, "labels") <- newlabs
     return(x)
