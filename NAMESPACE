@@ -28,25 +28,35 @@ export(vl_set)
 import(dplyr)
 import(rlang)
 import(tidyselect)
-importFrom(checkmate,assertAtomicVector)
-importFrom(checkmate,qassert)
-importFrom(checkmate,testAtomicVector)
-importFrom(cli,cli_div)
-importFrom(cli,cli_end)
-importFrom(cli,cli_inform)
-importFrom(cli,cli_text)
+importFrom(checkmate,
+  assertAtomicVector,
+  qassert,
+  testAtomicVector
+)
+importFrom(cli,
+  cli_div,
+  cli_end,
+  cli_inform,
+  cli_text
+)
 importFrom(data.table,fcase)
 importFrom(glue,glue)
-importFrom(haven,labelled)
-importFrom(haven,labelled_spss)
-importFrom(haven,zap_missing)
+importFrom(haven,
+  labelled,
+  labelled_spss,
+  zap_missing
+)
 importFrom(methods,allNames)
-importFrom(mirt,fscores)
-importFrom(mirt,mirt)
+importFrom(mirt,
+  fscores,
+  mirt
+)
 importFrom(pedant,add_double_colons)
 importFrom(pipebind,bind)
 importFrom(plyr,revalue)
 importFrom(renv,dependencies)
-importFrom(stats,na.omit)
-importFrom(stats,setNames)
+importFrom(stats,
+  na.omit,
+  setNames
+)
 importFrom(tibble,tibble)
