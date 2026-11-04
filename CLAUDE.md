@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`egstras` is a personal R utility package for the DDS 21 research project (survey data work: SPSS-labelled vectors, recoding, item scoring, IRT). Hosted on GitLab at `gitlab.uzh.ch/jaschamax.egli/egstras`; installed via `devtools::install_gitlab("jaschamax.egli/egstras", host = "gitlab.uzh.ch")`. Depends on `pedant` from GitHub (`Remotes: wurli/pedant`).
+`egstras` is a personal R utility package for the DDS 21 research project (survey data work: SPSS-labelled vectors, recoding, item scoring, IRT). Hosted on GitHub at `github.com/jaschaegli/egstras` (formerly `gitlab.uzh.ch/jaschamax.egli/egstras`, now archived); installed via `devtools::install_github("jaschaegli/egstras")`. Depends on `pedant` from GitHub (`Remotes: wurli/pedant`).
 
 ## Commands
 

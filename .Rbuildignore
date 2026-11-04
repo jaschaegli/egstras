@@ -8,3 +8,4 @@
 ^\.ripgreprc$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$

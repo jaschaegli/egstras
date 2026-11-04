@@ -6,7 +6,8 @@ Authors@R:
 Description: A collection of utility functions developed for the DDS 21
     research project.
 License: GPL (>= 3)
-URL: https://gitlab.uzh.ch/jaschamax.egli/egstras
+URL: https://github.com/jaschaegli/egstras
+BugReports: https://github.com/jaschaegli/egstras/issues
 Depends:
     R (>= 4.2)
 Imports: 
