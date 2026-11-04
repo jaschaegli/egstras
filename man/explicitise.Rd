@@ -4,15 +4,85 @@
 \alias{explicitise}
 \title{Make all function calls in the current directory explicit}
 \usage{
-explicitise(filesfrom = c("git", "wd"), rgx_filesubset = "\\\\.R$", ...)
+explicitise(
+  filesfrom = c("git", "wd"),
+  rgx_filesubset = "\\\\.R$",
+  rgx_exclude = "(^|/)(renv|packrat)/",
+  use_packages = NULL,
+  ignore_functions = character(),
+  dry_run = FALSE,
+  force = FALSE
+)
 }
 \arguments{
-\item{filesfrom}{A string that is either "git", or "wd", indicating whether to explicitise all files on the currently-active git branch (the default, if available), or all files in the working directory}
+\item{filesfrom}{A string that is either \code{"git"} or \code{"wd"}. \code{"git"} (the
+default) targets files tracked by git below the working directory, falling
+back to \code{"wd"} outside a git work tree. \code{"wd"} targets all files in the
+working directory.}
 
-\item{rgx_filesubset}{A case_insensitive PCRE expression used for subsetting the list of target files that explicitiser is run on.  The default expression, "\\.R$", limits the operations to files with a ".R" or ".r" file extension.}
+\item{rgx_filesubset}{A case-insensitive PCRE expression used for subsetting
+the list of target files. The default, \code{"\\\\.R$"}, limits the operation to
+files with a \code{.R} or \code{.r} extension.}
 
-\item{...}{Additional arguments passed to \code{\link[pedant:add_double_colons]{pedant::add_double_colons()}}}
+\item{rgx_exclude}{A case-sensitive PCRE expression; matching files are
+excluded from the target files. The default excludes the \verb{renv/} and
+\verb{packrat/} directories. Use \code{NA} to exclude nothing.}
+
+\item{use_packages}{Character vector of installed packages whose exports are
+prefixed, in order of priority. \code{NULL} (the default) uses the installed
+dependencies found by \code{\link[renv:dependencies]{renv::dependencies()}} in the target files, followed
+by the default attached packages and \code{base}.}
+
+\item{ignore_functions}{Character vector of function names never to prefix.}
+
+\item{dry_run}{If \code{TRUE}, report the files that would change without writing
+anything.}
+
+\item{force}{If \code{TRUE}, also rewrite files whose current content git could
+not restore.}
+}
+\value{
+Invisibly, a character vector of the paths of the files that were
+changed (or would be changed, if \code{dry_run = TRUE}).
 }
 \description{
-Loops over all files in a project and adds namespace prefixes to all function calls by searching for dependencies inside the working directory with \code{\link[renv:dependencies]{renv::dependencies()}} and feeding them to \code{\link[pedant:add_double_colons]{pedant::add_double_colons()}}
+Loops over all target files in a project and adds namespace prefixes
+(\verb{pkg::}) to all calls of functions exported by the packages in
+\code{use_packages}. By default, these are the dependencies found in the target
+files by \code{\link[renv:dependencies]{renv::dependencies()}}.
 }
+\details{
+Files are rewritten \strong{in place}. To keep this undoable, \code{explicitise()}
+refuses to touch files whose current content git could not restore (files
+with unstaged changes, untracked files, or any file outside a git work tree)
+unless \code{force = TRUE}. Use \code{dry_run = TRUE} to see which files would change.
+
+Line endings, trailing newlines and encoding (assumed UTF-8) are preserved;
+files whose content would not change are not written. Files that do not
+parse are skipped with a warning.
+}
+\section{What is prefixed}{
+
+Function calls are found with R's own parser (\code{\link[utils:getParseData]{utils::getParseData()}}), so
+comments and string literals are never changed. Left alone are:
+\itemize{
+\item calls that already have a prefix (\code{pkg::f()}, \code{pkg:::f()}) and method
+calls (\code{obj$f()}, \code{obj@f()});
+\item calls of functions defined anywhere in the target files
+(\verb{f <- function(...)}, \verb{f = \\(...)}), and calls of a function's own
+arguments inside that function (\code{function(f) f(x)});
+\item functions from \code{base}, and functions named in \code{ignore_functions};
+\item infix operators (\verb{\%>\%}, \code{\%in\%}) and functions called by name, e.g.
+\code{do.call("f", ...)} or \code{lapply(x, f)}.
+}
+
+Replacement calls are prefixed using the replacement function's export, so
+\code{var_label(x) <- "a"} becomes \code{labelled::var_label(x) <- "a"} only if
+\code{labelled} exports \code{`var_label<-`}.
+
+When several packages export a function of the same name, the first package
+in \code{use_packages} wins. With the default, that is the order in which
+dependencies first appear in the target files, followed by the default
+attached packages (\code{getOption("defaultPackages")}) and \code{base}.
+}
+
