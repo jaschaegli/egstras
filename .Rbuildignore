@@ -1,0 +1,10 @@
+^\.claude$
+^CLAUDE\.md$
+^LICENSE\.md$
+^\.idea$
+^\.vscode$
+^\.mcp\.json$
+^\.gitmodules$
+^\.ripgreprc$
+^.*\.Rproj$
+^\.Rproj\.user$
