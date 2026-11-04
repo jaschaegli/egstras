@@ -118,8 +118,8 @@ fit_irt_theta <- function(
 
     if (!is.null(coerce_na)) {
         data <- data |>
-            dplyr::across(
-                dplyr::mutate(
+            dplyr::mutate(
+                dplyr::across(
                     .cols = tidyselect::all_of(item_names),
                     .fns = \(x) {
                         dplyr::replace_when(x, x %in% coerce_na ~ NA_real_)
