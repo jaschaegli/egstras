@@ -6,12 +6,12 @@
 #' @export
 
 getvl <- function(x, textonly = FALSE) {
-    checkmate::qassert(x, "v") # Atomic vector
-    out <- attr(x, "labels")
-    if (textonly == TRUE) {
-        out <- names(out)
-    }
-    return(out)
+  checkmate::qassert(x, "v") # Atomic vector
+  out <- attr(x, "labels")
+  if (textonly == TRUE) {
+    out <- names(out)
+  }
+  return(out)
 }
 
 #' @rdname getvl
@@ -23,18 +23,18 @@ vl_get <- getvl
 #'
 #' @keywords internal
 setvl_helper_add_partial <- function(x, labs) {
-    if (!all(labs %in% unique(stats::na.omit(x)))) {
-        warning("some labels are not present in x, and will be ignored")
-    }
-    labs_missing <- x[which(!x %in% labs)]
-    nums_as_labs <- stats::setNames(
-        labs_missing,
-        nm = as.character(labs_missing)
-    )
-    labs <- sort(c(nums_as_labs, labs))
-    attr(x, "labels") <- sort(labs)
+  if (!all(labs %in% unique(stats::na.omit(x)))) {
+    warning("some labels are not present in x, and will be ignored")
+  }
+  labs_missing <- x[which(!x %in% labs)]
+  nums_as_labs <- stats::setNames(
+    labs_missing,
+    nm = as.character(labs_missing)
+  )
+  labs <- sort(c(nums_as_labs, labs))
+  attr(x, "labels") <- sort(labs)
 
-    return(x)
+  return(x)
 }
 
 
@@ -42,12 +42,12 @@ setvl_helper_add_partial <- function(x, labs) {
 #'
 #' @keywords internal
 setvl_helper_add_unnamed <- function(x, labs) {
-    labs <- stats::setNames(
-        sort(unique(as.numeric(stats::na.omit(x)))),
-        nm = labs
-    )
-    attr(x, "labels") <- labs
-    return(x)
+  labs <- stats::setNames(
+    sort(unique(as.numeric(stats::na.omit(x)))),
+    nm = labs
+  )
+  attr(x, "labels") <- labs
+  return(x)
 }
 
 
@@ -61,44 +61,44 @@ setvl_helper_add_unnamed <- function(x, labs) {
 #' Only applicable when labs is a named vector with fewer elements than there are unique values in x.
 #' @export
 setvl <- function(x, labs, fill_partial = TRUE) {
-    checkmate::qassert(x, "x") # Integerish, NAs ok
-    checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
+  checkmate::qassert(x, "x") # Integerish, NAs ok
+  checkmate::assertAtomicVector(labs, unique = TRUE, any.missing = FALSE)
 
-    if (namecheck(labs) == "some_named") {
-        stop("Labels may not mix named and unnamed elements")
-    }
+  if (namecheck(labs) == "some_named") {
+    stop("Labels may not mix named and unnamed elements")
+  }
 
-    ulen <- length(unique(stats::na.omit(x)))
-    labsnamed <- checkmate::testAtomicVector(labs, names = "named")
+  ulen <- length(unique(stats::na.omit(x)))
+  labsnamed <- checkmate::testAtomicVector(labs, names = "named")
 
-    if (
-        ((!length(labs) == ulen) && !labsnamed) ||
-            ((length(labs) == ulen) && !is.character(labs) && !labsnamed)
-    ) {
-        stop(
-            "Labels must either be a character vector of length unique(x), or a named vector"
-        )
-    }
+  if (
+    ((!length(labs) == ulen) && !labsnamed) ||
+      ((length(labs) == ulen) && !is.character(labs) && !labsnamed)
+  ) {
+    stop(
+      "Labels must either be a character vector of length unique(x), or a named vector"
+    )
+  }
 
-    if (!length(labs) == ulen) {
-        if (!any(labs %in% x)) {
-            stop(
-                "Labels are not equal in length to x and contain no variables to match on"
-            )
-        } else if (fill_partial == FALSE) {
-            attr(x, "labels") <- labs
-        } else {
-            x <- setvl_helper_add_partial(x, labs)
-        }
+  if (!length(labs) == ulen) {
+    if (!any(labs %in% x)) {
+      stop(
+        "Labels are not equal in length to x and contain no variables to match on"
+      )
+    } else if (fill_partial == FALSE) {
+      attr(x, "labels") <- labs
     } else {
-        if (!checkmate::testAtomicVector(labs, names = "named")) {
-            warning("Labels are not a named vector; assigning based on order")
-            x <- setvl_helper_add_unnamed(x, labs)
-        } else {
-            attr(x, "labels") <- labs
-        }
+      x <- setvl_helper_add_partial(x, labs)
     }
-    return(x)
+  } else {
+    if (!checkmate::testAtomicVector(labs, names = "named")) {
+      warning("Labels are not a named vector; assigning based on order")
+      x <- setvl_helper_add_unnamed(x, labs)
+    } else {
+      attr(x, "labels") <- labs
+    }
+  }
+  return(x)
 }
 
 #' @rdname setvl
@@ -113,9 +113,9 @@ vl_set <- setvl
 #' @export
 
 getcl <- function(x) {
-    checkmate::qassert(x, "v") # Atomic vector, NAs ok
-    out <- attr(x, "label", exact = TRUE)
-    return(out)
+  checkmate::qassert(x, "v") # Atomic vector, NAs ok
+  out <- attr(x, "label", exact = TRUE)
+  return(out)
 }
 
 #' @rdname getcl
@@ -130,9 +130,9 @@ cl_get <- getcl
 #' @param lab a label to be set; must be a character vector of length 1
 #' @export
 setcl <- function(x, lab) {
-    checkmate::qassert(lab, "S1") # String of length 1, no NAs
-    attr(x, "label") <- lab
-    return(x)
+  checkmate::qassert(lab, "S1") # String of length 1, no NAs
+  attr(x, "label") <- lab
+  return(x)
 }
 
 #' @rdname setcl
@@ -146,19 +146,19 @@ cl_set <- setcl
 #' @param reps a named vector in the format c("To be replaced" = "Replacement")
 #' @export
 modvl <- function(x, reps) {
-    oldlabs <- attr(x, "labels")
+  oldlabs <- attr(x, "labels")
 
-    newlabs <-
-        stats::setNames(
-            unname(oldlabs),
-            plyr::revalue(
-                x = names(oldlabs),
-                replace = reps
-            )
-        )
+  newlabs <-
+    stats::setNames(
+      unname(oldlabs),
+      plyr::revalue(
+        x = names(oldlabs),
+        replace = reps
+      )
+    )
 
-    attr(x, "labels") <- newlabs
-    return(x)
+  attr(x, "labels") <- newlabs
+  return(x)
 }
 
 #' @rdname modvl

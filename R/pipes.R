@@ -9,7 +9,6 @@
 #'
 #' @export
 
-
 pb <- function(x, ...) {
-    pipebind::bind(.pipeValue = x, .pipeBind = ., ...)
+  pipebind::bind(.pipeValue = x, .pipeBind = ., ...)
 }

@@ -9,13 +9,13 @@
 #' @export
 
 namecheck <- function(x) {
-    noname <- methods::allNames(x) == ""
+  noname <- methods::allNames(x) == ""
 
-    res <- data.table::fcase(
-        all(noname == TRUE), "none_named",
-        any(noname == FALSE) && any(noname == TRUE), "some_named",
-        all(noname == FALSE), "all_named",
-        default = "ERROR"
-    )
-    return(res)
+  res <- data.table::fcase(
+    all(noname == TRUE)                         , "none_named" ,
+    any(noname == FALSE) && any(noname == TRUE) , "some_named" ,
+    all(noname == FALSE)                        , "all_named"  ,
+    default = "ERROR"
+  )
+  return(res)
 }

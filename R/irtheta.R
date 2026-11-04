@@ -76,98 +76,98 @@
 #' @export
 
 fit_irt_theta <- function(
-    data,
-    cols,
-    theta_name = "theta",
-    method = "EM",
-    fscores_method = "EAP",
-    return_model = FALSE,
-    coerce_correct = NULL,
-    coerce_incorrect = NULL,
-    coerce_na = NULL
+  data,
+  cols,
+  theta_name = "theta",
+  method = "EM",
+  fscores_method = "EAP",
+  return_model = FALSE,
+  coerce_correct = NULL,
+  coerce_incorrect = NULL,
+  coerce_na = NULL
 ) {
-    data_cop <- data
+  data_cop <- data
 
-    item_names <- names(
-        dplyr::select(data, {{ cols }})
-    )
+  item_names <- names(
+    dplyr::select(data, {{ cols }})
+  )
 
-    if (!is.null(coerce_correct)) {
-        data <- data |>
-            dplyr::mutate(
-                dplyr::across(
-                    .cols = tidyselect::all_of(item_names),
-                    .fns = \(x) {
-                        dplyr::replace_when(x, x %in% coerce_correct ~ 1)
-                    }
-                )
-            )
-    }
-
-    if (!is.null(coerce_incorrect)) {
-        data <- data |>
-            dplyr::mutate(
-                dplyr::across(
-                    .cols = tidyselect::all_of(item_names),
-                    .fns = \(x) {
-                        dplyr::replace_when(x, x %in% coerce_incorrect ~ 0)
-                    }
-                )
-            )
-    }
-
-    if (!is.null(coerce_na)) {
-        data <- data |>
-            dplyr::mutate(
-                dplyr::across(
-                    .cols = tidyselect::all_of(item_names),
-                    .fns = \(x) {
-                        dplyr::replace_when(x, x %in% coerce_na ~ NA_real_)
-                    }
-                )
-            )
-    }
-
-    items <- data |>
-        dplyr::select(tidyselect::all_of(item_names)) |>
-        haven::zap_missing()
-
-    items <- dplyr::mutate(
-        items,
+  if (!is.null(coerce_correct)) {
+    data <- data |>
+      dplyr::mutate(
         dplyr::across(
-            dplyr::everything(),
-            as.numeric
+          .cols = tidyselect::all_of(item_names),
+          .fns = \(x) {
+            dplyr::replace_when(x, x %in% coerce_correct ~ 1)
+          }
         )
-    )
+      )
+  }
 
-    theta <- rep(NA_real_, nrow(data))
-
-    model <- mirt::mirt(
-        data = items,
-        model = 1,
-        itemtype = "2PL",
-        method = method,
-        verbose = FALSE
-    )
-
-    theta <- as.numeric(
-        mirt::fscores(
-            model,
-            method = fscores_method,
-            full.scores = TRUE
-        )[, 1]
-    )
-
-    data_cop[[theta_name]] <- theta
-
-    if (return_model) {
-        return(
-            list(
-                data = data_cop,
-                model = model
-            )
+  if (!is.null(coerce_incorrect)) {
+    data <- data |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = tidyselect::all_of(item_names),
+          .fns = \(x) {
+            dplyr::replace_when(x, x %in% coerce_incorrect ~ 0)
+          }
         )
-    }
+      )
+  }
 
-    data_cop
+  if (!is.null(coerce_na)) {
+    data <- data |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = tidyselect::all_of(item_names),
+          .fns = \(x) {
+            dplyr::replace_when(x, x %in% coerce_na ~ NA_real_)
+          }
+        )
+      )
+  }
+
+  items <- data |>
+    dplyr::select(tidyselect::all_of(item_names)) |>
+    haven::zap_missing()
+
+  items <- dplyr::mutate(
+    items,
+    dplyr::across(
+      dplyr::everything(),
+      as.numeric
+    )
+  )
+
+  theta <- rep(NA_real_, nrow(data))
+
+  model <- mirt::mirt(
+    data = items,
+    model = 1,
+    itemtype = "2PL",
+    method = method,
+    verbose = FALSE
+  )
+
+  theta <- as.numeric(
+    mirt::fscores(
+      model,
+      method = fscores_method,
+      full.scores = TRUE
+    )[, 1]
+  )
+
+  data_cop[[theta_name]] <- theta
+
+  if (return_model) {
+    return(
+      list(
+        data = data_cop,
+        model = model
+      )
+    )
+  }
+
+  data_cop
 }

@@ -5,14 +5,13 @@
 #' @export
 
 remove_whitespace <- function(x) {
-    # Set formals
-    formals(gsub)$perl <- TRUE
-    x <- x |>
-        trimws() |>
-        gsub("\\n+", " ", x = _) |>
-        gsub("\\s+", " ", x = _)
+  # Set formals
+  formals(gsub)$perl <- TRUE
+  x <- x |>
+    trimws() |>
+    gsub("\\n+", " ", x = _) |>
+    gsub("\\s+", " ", x = _)
 }
-
 
 
 #' Add backticks to strings
@@ -29,20 +28,19 @@ remove_whitespace <- function(x) {
 #' @export
 #'
 add_backticks <- function(x, remove_outer = TRUE) {
-    checkmate::qassert(x, "s+") # string of length 1+, NAs ok
+  checkmate::qassert(x, "s+") # string of length 1+, NAs ok
 
-    x <- encodeString(x, quote = "`")
+  x <- encodeString(x, quote = "`")
 
-    if (remove_outer == TRUE) {
-        x <- noquote(x)
-    }
-    return(x)
+  if (remove_outer == TRUE) {
+    x <- noquote(x)
+  }
+  return(x)
 }
 
 #' @rdname add_backticks
 #' @export
 backticks_add <- add_backticks
-
 
 
 #' Remove backticks from strings
@@ -60,15 +58,15 @@ backticks_add <- add_backticks
 #'
 #'
 remove_backticks <- function(x, add_quotes = TRUE) {
-    checkmate::qassert(x, "s+") # string of length 1+, NAs ok
-    checkmate::qassert(add_quotes, "B")
+  checkmate::qassert(x, "s+") # string of length 1+, NAs ok
+  checkmate::qassert(add_quotes, "B")
 
-    if (add_quotes == FALSE) {
-        x <- gsub(x = x, pattern = "`", replacement = "")
-    } else {
-        x <- gsub(x = x, pattern = "`", replacement = '"')
-    }
-    return(x)
+  if (add_quotes == FALSE) {
+    x <- gsub(x = x, pattern = "`", replacement = "")
+  } else {
+    x <- gsub(x = x, pattern = "`", replacement = '"')
+  }
+  return(x)
 }
 
 #' @rdname remove_backticks

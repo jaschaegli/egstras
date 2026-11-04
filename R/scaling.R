@@ -14,9 +14,9 @@
 #' @export
 
 center_vector <- function(vector, mean = 1) {
-    checkmate::qassert(vector, "n+") # Numeric, NAs acceptable
-    attrs <- attributes(vector)
-    out <- scale(vector, center = TRUE, scale = FALSE) + mean |> as.numeric()
-    attributes(out) <- attrs
-    return(out)
+  checkmate::qassert(vector, "n+") # Numeric, NAs acceptable
+  attrs <- attributes(vector)
+  out <- scale(vector, center = TRUE, scale = FALSE) + mean |> as.numeric()
+  attributes(out) <- attrs
+  return(out)
 }

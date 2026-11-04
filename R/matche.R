@@ -8,48 +8,47 @@
 #' @param label an optional "label" attribute for the output vector
 #' @export
 
-
 make_matchcheck <- function(
-    x, y,
-    output = c("logical", "factor", "labelled", "numeric"),
-    nahandle = c("keep", "false"),
-    levels = c("No", "Yes"),
-    label = NULL) {
-    output <- match.arg(output, several.ok = FALSE)
-    nahandle <- match.arg(nahandle)
-    checkmate::qassert(levels, "s2") # String of length 2
-    checkmate::qassert(label, c("s1", 0)) # String of length 1 or NULL
+  x,
+  y,
+  output = c("logical", "factor", "labelled", "numeric"),
+  nahandle = c("keep", "false"),
+  levels = c("No", "Yes"),
+  label = NULL
+) {
+  output <- match.arg(output, several.ok = FALSE)
+  nahandle <- match.arg(nahandle)
+  checkmate::qassert(levels, "s2") # String of length 2
+  checkmate::qassert(label, c("s1", 0)) # String of length 1 or NULL
 
+  checkvec <- data.table::fcase(
+    x == y   , TRUE  ,
+    x != y   , FALSE ,
+    is.na(x) , NA
+  )
 
-    checkvec <- data.table::fcase(
-        x == y, TRUE,
-        x != y, FALSE,
-        is.na(x), NA
-    )
+  if (nahandle == "false") {
+    checkvec[is.na(checkvec)] <- FALSE
+  }
 
-    if (nahandle == "false") {
-        checkvec[is.na(checkvec)] <- FALSE
-    }
+  if (output == "numeric") {
+    checkvec <- as.numeric(checkvec)
+  }
 
-    if (output == "numeric") {
-        checkvec <- as.numeric(checkvec)
-    }
+  if (output == "factor") {
+    checkvec <- as.factor(checkvec)
+    levels(checkvec) <- levels
+  }
 
-    if (output == "factor") {
-        checkvec <- as.factor(checkvec)
-        levels(checkvec) <- levels
-    }
+  if (output == "labelled") {
+    checkvec <- as.numeric(checkvec)
+    lab <- stats::setNames(sort(unique(stats::na.omit(checkvec))), nm = levels)
+    checkvec <- setvl(checkvec, lab)
+  }
 
-    if (output == "labelled") {
-        checkvec <- as.numeric(checkvec)
-        lab <- stats::setNames(sort(unique(stats::na.omit(checkvec))), nm = levels)
-        checkvec <- setvl(checkvec, lab)
-    }
+  if (!is.null(label)) {
+    attr(checkvec, "label") <- label
+  }
 
-
-    if (!is.null(label)) {
-        attr(checkvec, "label") <- label
-    }
-
-    return(checkvec)
+  return(checkvec)
 }
